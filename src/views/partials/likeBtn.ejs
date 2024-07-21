@@ -1,0 +1,7 @@
+<button id="likeButton" class="button" data-id="<%= locals.book._id%>">
+    <% if (locals.likedThisBook) { %>
+        <img src="/public/appImages/likeFilled.svg" alt="">
+        <% }else { %>
+            <img src="/public/appImages/likeEmpty.svg" alt="">
+    <% } %>
+</button>

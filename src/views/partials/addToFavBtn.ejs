@@ -1,0 +1,7 @@
+<button id="favoriteButton" class="button" data-id="<%= locals.book._id %>">
+    <% if (locals.favBook) { %>
+        <img src="/public/appImages/addToFavEmpty.svg" alt="">
+        <% }else { %>
+            <img src="/public/appImages/addToFavFilled.svg" alt="">
+            <% } %>
+</button>

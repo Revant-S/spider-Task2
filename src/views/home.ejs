@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/headTag.ejs") %>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .wholePage {
+            padding: 0%;
+            overflow: scroll;
+            margin: 0%;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .outer {
+            padding: 0%;
+            margin: 0%;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: flex-start;
+        }
+        .bookSpace {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            padding: 3%;
+            grid-gap: 1%;
+            width: 100%;
+            height: 100%;
+        }
+        .hideExcess {
+            overflow: hidden;
+        }
+        .ptag {
+            max-height: 10vh;
+            overflow: hidden;
+        }
+        .cardImage {
+            max-height: 35vh;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        .card {
+            height: fit-content;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .btn-container {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        /* Sidebar styles */
+      
+    </style>
+    <link rel="stylesheet" href="/public/cssFiles/modalAddBooks.css">
+    <link rel="stylesheet" href="/public/cssFiles/nav.css">
+    <link rel="stylesheet" href="/public/cssFiles/sideBar.css">
+    <link rel="stylesheet" href="/public/cssFiles/modalAddBooks.css">
+</head>
+<body>
+    <div class="outer">
+        <%- include("./partials/sideBar.ejs") %>
+        <%- include("./partials/addBookModel.ejs") %>
+        <div class="wholePage">
+            <%- include("./partials/navBar.ejs") %>
+            <h1>My Books</h1>
+            <div class="bookSpace">
+                <% locals.books.forEach(book => { %>
+                    <div class="card small" style="width: 18rem;">
+                        <img src="<%= book.imageLink %>" class="card-img-top cardImage" alt="<%= book.title %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= book.title %></h5>
+                            <p class="card-text ptag"><%= book.description %></p>
+                            <div class="btn-container">
+                                <a href="/books/viewBook/<%= book._id%>" class="btn btn-primary">View Details</a>
+                                <button class="btn btn-danger deleteBtn" data-bookId="<%= book._id %>">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/public/dist/home.bundle.js" type="module"></script>
+</body>
+</html>
+
+
+

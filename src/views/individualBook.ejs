@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/headTag.ejs") %>
+    <link rel="stylesheet" href="/public/cssFiles/commentBox.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 5%;
+        }
+        .book-container {
+            background-color: #ffffff;
+            border: 0.0625rem solid #ddd;
+            width: 90%;
+            margin: 0 auto;
+            padding: 5%;
+        }
+        .book-image {
+            width: 100%;
+            max-height: 50vh;
+            object-fit: cover;
+            margin-bottom: 5%;
+        }
+        h1 {
+            color: #444;
+            font-size: 6vw;
+            margin-bottom: 3%;
+        }
+        p {
+            margin-bottom: 3%;
+            line-height: 150%;
+        }
+        .authors,
+        .genre {
+            color: #666;
+            font-style: italic;
+        }
+        .likes {
+            font-weight: bold;
+            color: #555;
+        }
+        .button-container {
+            margin-top: 5%;
+        }
+        .button {
+            display: inline-block;
+            padding: 1% 2%;
+            margin-right: 3%;
+            text-align: center;
+            text-decoration: none;
+            font-size: large;
+            border: none;
+            cursor: pointer;
+            width: 10vw;
+            background: none;
+            transition: 0.6s;
+        }
+        .button:hover {
+            transform: translateY(-5%);
+        }
+        .button img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <img src="<%= locals.book.imageLink %>" alt="Book Cover" class="book-image">
+        <h1><%= locals.book.title %></h1>
+        <p class="authors">
+            <% locals.book.authors.forEach((author, index) => { %>
+                <% if (index < locals.book.authors.length - 1) { %>
+                    <span><%= author + ", " %></span>
+                <% } else { %>
+                    <span><%= author %></span>
+                <% } %>
+            <% }) %>
+        </p>
+        <p class="publisher">Published by: <%= locals.book.publisher %></p>
+        <p class="description"><%= locals.book.description %></p>
+        <p class="genre">
+            <% locals.book.genere.forEach(element => { %>
+                <span><%= element %></span>
+            <% }) %>
+        </p>
+        <p class="likes" id="numberOfLikes">Likes: <%= locals.book.likes %></p>
+        <div class="button-container">
+            <%- include("./partials/likeBtn.ejs") %>
+            <%- include("./partials/addToFavBtn.ejs") %>
+      
+        </div>
+        <h3>Reviews (<%= locals.book.reviews.length %>)</h3>
+        <div class="commentBox">
+            <%- include("./partials/reviewBox.ejs") %>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/public/dist/bookDetails.bundle.js"></script>
+</body>
+</html>

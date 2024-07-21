@@ -1,0 +1,31 @@
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-size: 28px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+}
+
+.navbar .form-control,
+.navbar .btn {
+    font-size: 16px;
+    height: 45px;
+}
+
+.navbar .form-control {
+    max-width: 400px;
+    width: 100%;
+}
+
+.navbar form {
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+#searchBtn{
+    max-width: 8vw;
+}

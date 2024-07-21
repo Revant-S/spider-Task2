@@ -1,0 +1,42 @@
+<div class="modal fade modal-xl" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <%- include("./sucessAlert.ejs") %>
+  <%- include("./faliureAlert.ejs") %>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+
+            <form id="bookSubmitForm" >
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Book Name</span>
+                    <input type="text" class="form-control" placeholder="Book Name" aria-label="Username" aria-describedby="basic-addon1" name="bookName">
+                  </div>
+                  
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Authors (separate with ',' if multiple)" aria-label="Recipient's username" aria-describedby="basic-addon2" name="authors">
+                    <span class="input-group-text" id="basic-addon2">Authors</span>
+                  </div>
+                  
+     
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">Publisher</span>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name = "publisher">
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02" name="bookCoverImage">
+                    <label class="input-group-text" for="inputGroupFile02">Upload Image</label>
+                  </div>
+                  
+                  <div class="input-group">
+                    <span class="input-group-text">Description</span>
+                    <textarea class="form-control mb-10" aria-label="With textarea" placeholder="minimum 10 words" name="Description"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary custom-btn-size mt-10" id="submitBtn">Add</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
