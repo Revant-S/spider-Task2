@@ -10,7 +10,8 @@ export interface IUserModel{
     followers : Types.ObjectId[],
     favourites : Types.ObjectId[],
     likedBooks : Types.ObjectId[],
-    lastSearched : string   
+    lastSearched : string,
+    coins : number   
 }
 
 export interface IUserMethods{

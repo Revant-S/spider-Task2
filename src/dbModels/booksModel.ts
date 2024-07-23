@@ -43,8 +43,21 @@ const bookSchema = new mongoose.Schema<IVolumeInfo>({
     apiId : {
         type : String,
         default : "User-Book"
+    },
+    cost : {
+        type : {
+            amount : Number,
+            currencyCode : String
+        },
+        default : {
+            amount : 0,
+            currencyCode : "INR"
+        }
+    },
+    previewUrl : {
+        type : String,
+        default : ""
     }
-
 })
 bookSchema.pre("save" , function(){
     const htmlDescription = this.description;

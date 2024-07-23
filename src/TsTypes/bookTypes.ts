@@ -12,7 +12,9 @@ export interface IVolumeInfo  {
     language: string;
     likes : number,
     reviews : Types.ObjectId[],
-    apiId : string
+    apiId : string,
+    cost : Cost,
+    previewUrl : string
 };
 
 export interface bookBody{
@@ -20,4 +22,9 @@ export interface bookBody{
     authors : string,
     publisher? : string,
     Description : string
+}
+
+export interface Cost{
+    amount: number,
+    currencyCode: string 
 }

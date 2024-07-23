@@ -93,6 +93,9 @@
         <div class="button-container">
             <%- include("./partials/likeBtn.ejs") %>
             <%- include("./partials/addToFavBtn.ejs") %>
+            <% if (!(locals.book.cost.currencyCode === "Cant Purchase")) { %>
+                <%- include("./partials/purchaseBtn.ejs") %>
+            <% } %>
       
         </div>
         <h3>Reviews (<%= locals.book.reviews.length %>)</h3>

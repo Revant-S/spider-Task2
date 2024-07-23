@@ -2,14 +2,11 @@ import { Request, Response } from "express";
 import { UserRequest } from "../middlewares/authMiddleWare";
 import User from "../dbModels/userModel";
 import { verifyAddBookBody } from "../zodVerification/requestBody";
-import { bookBody } from "../TsTypes/bookTypes";
+import { Cost, bookBody } from "../TsTypes/bookTypes";
 import Book from "../dbModels/booksModel";
 import Review from "../dbModels/reviewDbModel";
 import { searchASpecificVolume, searchOnine } from "../otherApiServices/googleBooksApi";
 import mongoose from "mongoose";
-
-// import { AxiosError } from "axios";
-// import { extend } from "lodash";
 
 export interface SearhRequest {
     search: string,
@@ -35,7 +32,6 @@ export async function addTheBook(req: Request, res: Response) {
     const user = await getUserFromRequest(req)
     if (!user) return res.send("You DOnt exit!!");
     const verification = verifyAddBookBody(req.body);
-    console.log(verification.error);
     if (!verification.success) return res.send(verification.error);
     const newEntry = await createBookEntry(req.body, req.file?.filename)
     const updateUser = await User.findByIdAndUpdate(user._id, { $push: { books: newEntry._id } })
@@ -56,7 +52,20 @@ export async function viewBook(req: Request, res: Response) {
         if (!bookInDb) {
             const requiredBook = await searchASpecificVolume(bookId);
             if (!requiredBook) return res.status(400).json({ message: "Resource  Not Found" });
-            console.log(requiredBook);
+            
+            let cost : Cost
+            if (requiredBook.saleInfo.listPrice) {
+                cost = {
+                    amount : requiredBook.saleInfo.listPrice.amount || 0,
+                    currencyCode  : requiredBook.saleInfo.listPrice.currencyCode  || "INR"
+                }
+            }else{
+                cost = {
+                    amount : 0,
+                    currencyCode : "Cant Purchase"
+                }
+            }
+      
             
             const newBook = await Book.create({
                 title: requiredBook.volumeInfo.title,
@@ -64,20 +73,20 @@ export async function viewBook(req: Request, res: Response) {
                 publisher: requiredBook.volumeInfo.publisher,
                 description: requiredBook.volumeInfo.description,
                 imageLink: requiredBook.volumeInfo.imageLinks.thumbnail,
-                apiId: requiredBook.id
+                apiId: requiredBook.id,
+                cost,
+                previewUrl : requiredBook.volumeInfo.previewLink
             });
-            console.log(newBook.description);
-            
-            return res.render("individualBook",{
-                book : newBook,
-                likedThisBook : false,
-                favBook : false
+            return res.render("individualBook", {
+                book: newBook,
+                likedThisBook: false,
+                favBook: false
             })
         }
         const likedIndex = user.likedBooks.indexOf(bookInDb._id);
         const favIndex = user.favourites.indexOf(bookInDb._id);
         return res.render("individualBook", {
-            book : bookInDb,
+            book: bookInDb,
             likedThisBook: !(likedIndex === -1),
             favBook: !(favIndex === -1)
         })
@@ -96,7 +105,7 @@ export async function viewBook(req: Request, res: Response) {
 
 export async function likeBook(req: Request, res: Response) {
     try {
-        
+
         const bookId = req.body.bookId;
         const user = await getUserFromRequest(req);
         const book = await Book.findById(bookId);
@@ -195,8 +204,6 @@ export async function searchTheBookOnline(req: Request, res: Response) {
     const user = await getUserFromRequest(req);
     if (!user) return res.json({ success: false, data: "User Not found" });
     let { search, term } = req.query;
-    console.log(search);
-
     if (!term) term = "intitle";
     try {
         const searchResponse = await searchOnine((search as string), (term as string));
@@ -205,8 +212,6 @@ export async function searchTheBookOnline(req: Request, res: Response) {
             data: searchResponse
         })
     } catch (error: any) {
-        console.log("HERE");
-        
         console.log(error.message);
         return res.status(404).json({
             success: false,
@@ -215,13 +220,14 @@ export async function searchTheBookOnline(req: Request, res: Response) {
     }
 }
 
-export async function changeProfileImage(req : Request , res : Response) {
+export async function changeProfileImage(req: Request, res: Response) {
     const user = await getUserFromRequest(req)
-    if(!user) return res.status(404).send("User not Found");
+    if (!user) return res.status(404).send("User not Found");
     user.profileImageURL = `/public/uploads/profileImages/${req.file?.filename}`;
     await user.save()
     res.json({
-        success : true,
-        message : "Profile Changed Sucessfully!!!"
+        success: true,
+        message: "Profile Changed Sucessfully!!!"
     })
 }
+

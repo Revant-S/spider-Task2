@@ -3,6 +3,7 @@ import { IUserMethods, IUserModel, UserModel } from "../TsTypes/userTypes";
 import jwt from "jsonwebtoken"
 import config from "config"
 import bcrypt from "bcrypt"
+
 const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
     userName: {
         type: String,
@@ -71,6 +72,10 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
     lastSearched : {
         type : String,
         default : ""
+    },
+    coins : {
+        type : Number,
+        default : 2000
     }
     
 })

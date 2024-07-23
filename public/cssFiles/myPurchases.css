@@ -1,0 +1,89 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.user-profile {
+    background-color: #f1f3f5;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.profile-image {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border: 0.25rem solid #ffffff;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+    color: #343a40;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-0.25rem);
+}
+
+.card-img-top {
+    height: 15rem;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.card-text.description {
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.no-books {
+    font-size: 1.2rem;
+    color: #6c757d;
+    text-align: center;
+    padding: 2rem;
+    background-color: #f1f3f5;
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .user-profile {
+        margin-bottom: 2rem;
+    }
+
+    .profile-image {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}

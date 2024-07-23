@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.book-image {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.book-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.book-authors {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.book-publisher {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.book-genre {
+    margin-bottom: 1rem;
+}
+
+.book-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.book-stats {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.book-price h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.purchase-btn {
+    font-size: 1.2rem;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.purchase-btn:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .book-title {
+        font-size: 1.5rem;
+    }
+
+    .book-authors {
+        font-size: 1rem;
+    }
+
+    .book-description {
+        font-size: 0.9rem;
+    }
+
+    .book-price h3 {
+        font-size: 1.2rem;
+    }
+
+    .purchase-btn {
+        font-size: 1rem;
+        padding: 0.5rem 1.5rem;
+    }
+}

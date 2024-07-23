@@ -6,6 +6,7 @@ module.exports = {
     home: "./public/js/home.js",
     bookDetails : "./public/js/bookDetails.js",
     myProfile : "./public/js/myProfile.js",
+    purchaseScript : "./public/js/purchaseScript.js"
   },
   output: {
     filename: "[name].bundle.js",

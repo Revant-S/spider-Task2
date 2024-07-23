@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import reviewRouters from "./routers/reviewRouters"
 import { getUserFromRequest } from './controllers/bookControllers';
 import userRoutes from "./routers/userRoutes"
+import purchaseRoutes from "./routers/purchaseEndPoints"
 // import { sendEmail } from './otherApiServices/mailService';
 // import { search } from './otherApiServices/googleBooksApi';
 const app = express();
@@ -28,6 +29,8 @@ app.use("/review", authoriseUser);
 app.use("/review", reviewRouters);
 app.use("/user", authoriseUser)
 app.use("/user",userRoutes)
+app.use("/purchase", authoriseUser);
+app.use("/purchase",purchaseRoutes )
 async function connectToDb() {
     try {
         await mongoose.connect(config.get("Book_Hub_mongoDbConnectionString"));
@@ -41,8 +44,6 @@ async function connectToDb() {
 connectToDb();
 
 
-// search();
-// sendEmail("revant.sinha@gmail.com", "THIS IS A CODE");
 app.get("/test", (req: Request, res: Response) => {
     res.send("hello!!!!!!!")
 })
@@ -52,7 +53,6 @@ app.get("/home", authoriseUser, async (req: Request, res: Response) => {
     const populatedUser = await user.populate([{
         path : "books",
     }])
-    console.log(populatedUser);
     
     res.render("home", {
         books : populatedUser.books 
