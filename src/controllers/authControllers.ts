@@ -3,6 +3,15 @@ import { userSignupBody } from "../TsTypes/userTypes";
 import { verifySignupBody } from "../zodVerification/requestBody";
 import User from "../dbModels/userModel";
 import bcrypt from "bcrypt"
+import { sendEmail } from "../otherApiServices/mailService";
+import crypto from "crypto"
+
+function generateRandomString(length: number) {
+    const bytesNeeded = Math.ceil(length / 2); 
+    const randomBytes = crypto.randomBytes(bytesNeeded);
+    const hexString = randomBytes.toString('hex');
+    return hexString.slice(0, length);
+}
 
 
 export async function getSignUpPage(req: Request, res: Response) {
@@ -49,4 +58,34 @@ export async function signin(req: Request, res: Response) {
         maxAge: 3600000,
         httpOnly: true
     }).redirect("/home");
+}
+
+
+
+export async function getEmailPage(req : Request , res : Response) {
+   return res.render("emailPage") 
+}
+export async function assignTempPassword(req : Request , res : Response) {
+    const user = await User.findOne({email: req.body.email});
+    if(!user) return res.send("User Not Found");
+    const passCode = generateRandomString(10);
+    await sendEmail(user.email , passCode);
+    user.password = passCode;
+    await user.save();
+    return res.redirect("/auth/resetPassword");
+}
+
+export async function resetPasswordPage(req : Request , res : Response) {
+    res.render("resetPassword");   
+}
+
+export async function resetPasswordInDb(req : Request , res : Response) {
+    const {email , newPassword, passCode} = req.body
+    const user = await User.findOne({email : email});
+    if(!user) return res.send("No User Found");
+    const verified = await bcrypt.compare(passCode , user.password);
+    if(!verified) return res.send("Incorrect Passcode");
+    user.password = newPassword;
+    await user.save()
+    return res.send("PassWord is reset Sucessfully!!!");
 }

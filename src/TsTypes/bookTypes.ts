@@ -11,7 +11,8 @@ export interface IVolumeInfo  {
     imageLink: string;
     language: string;
     likes : number,
-    reviews : Types.ObjectId[]
+    reviews : Types.ObjectId[],
+    apiId : string
 };
 
 export interface bookBody{

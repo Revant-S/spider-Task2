@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <%- include("./partials/headTag.ejs") %>
+    <link rel="stylesheet" href="/public/cssFiles/profileChangeDialog.css">
     <style>
         * {
             box-sizing: border-box;
@@ -11,7 +11,8 @@
             padding: 0;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
@@ -21,11 +22,11 @@
             background-color: #333;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
+            padding: 2vh 0;
         }
 
         main {
-            padding: 20px;
+            padding: 3vh 5vw;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -36,91 +37,117 @@
             justify-content: space-around;
             align-items: center;
             width: 90%;
-            max-width: 1000px;
-            margin-bottom: 40px;
+            margin-bottom: 5vh;
+            background-color: #fff;
+            border-radius: 2vw;
+            padding: 3vh 3vw;
+            box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
         }
 
         .profile-picture {
             width: 30%;
-            max-width: 200px;
+            max-width: 20vw;
         }
 
         .profile-picture img {
             width: 100%;
             height: auto;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
         }
 
         .user-details {
-            width: 70%;
-            max-width: 600px;
-            padding-left: 20px;
+            width: 65%;
         }
 
         .user-details h2 {
-            font-size: 2.5vw; /* Using vw for responsive font size */
-            margin-bottom: 1.5vh; /* Using vh for spacing */
+            font-size: 2.5vw;
+            margin-bottom: 1.5vh;
+            color: #333;
         }
 
         .user-details p {
-            font-size: 1.8vw; /* Using vw for responsive font size */
-            margin-bottom: 1vh; /* Using vh for spacing */
+            font-size: 1.5vw;
+            margin-bottom: 1vh;
             color: #666;
         }
 
-        .favorite-books, .liked-books {
+        .books-section {
             width: 90%;
-            max-width: 1000px;
-            margin-bottom: 5vh; /* Using vh for spacing */
+            margin-bottom: 5vh;
+            background-color: #fff;
+            border-radius: 2vw;
+            padding: 3vh 3vw;
+            box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
+        }
+
+        .books-section h2 {
+            font-size: 2.5vw;
+            margin-bottom: 2vh;
+            color: #333;
         }
 
         .books-list {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            height: 50vh;
+            overflow-y: auto;
         }
 
         .book-item {
-            width: 30%;
-            max-width: 30vw; /* Using vw for responsive item width */
-            margin: 3vh 0;
-            padding: 4vh 2vw; /* Using vw and vh for padding */
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 2vw; /* Using vw for rounded corners */
-            box-shadow: 0 2vh 4vh rgba(0, 0, 0, 0.1); /* Using vh for box shadow */
+            display: flex;
+            align-items: center;
+            margin-bottom: 2vh;
+            padding: 2vh 2vw;
+            background-color: #f9f9f9;
+            border-radius: 1vw;
             transition: transform 0.3s ease;
         }
 
         .book-item:hover {
-            transform: translateY(-1vh); /* Using vh for hover effect */
+            transform: translateY(-0.5vh);
         }
 
-        .book-item img {
+        .book-image {
+            width: 15%;
+            margin-right: 3vw;
+        }
+
+        .book-image img {
             width: 100%;
             height: auto;
-            border-radius: 2vw; /* Using vw for rounded corners */
+            border-radius: 0.5vw;
+            box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.1);
         }
 
-        .book-item h3 {
-            font-size: 2vw; /* Using vw for responsive font size */
-            margin-bottom: 1.5vh; /* Using vh for spacing */
+        .book-details {
+            width: 70%;
         }
 
-        .book-item p {
-            font-size: 1.5vw; /* Using vw for responsive font size */
-            color: #888;
-            margin-bottom: 1vh; /* Using vh for spacing */
+        .book-details h3 {
+            font-size: 1.8vw;
+            margin-bottom: 1vh;
+            color: #333;
         }
 
-        footer {
-            background-color: #333;
+        .book-details p {
+            font-size: 1.3vw;
+            color: #666;
+            margin-bottom: 0.5vh;
+        }
+
+        .delete-btn {
+            width: 15%;
+            background-color: #ff4d4d;
             color: #fff;
-            text-align: center;
-            padding: 2vh 0;
-            margin-top: auto;
-            width: 100%;
+            border: none;
+            padding: 1vh 1vw;
+            font-size: 1.2vw;
+            border-radius: 0.5vw;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff3333;
         }
 
         @media (max-width: 768px) {
@@ -131,66 +158,131 @@
 
             .profile-picture {
                 width: 50%;
-                max-width: 150px;
+                max-width: 30vw;
+                margin-bottom: 3vh;
             }
 
             .user-details {
-                width: 90%;
-                max-width: 600px;
-                padding-left: 0;
+                width: 100%;
                 text-align: center;
             }
 
+            .user-details h2 {
+                font-size: 4vw;
+            }
+
+            .user-details p {
+                font-size: 3vw;
+            }
+
+            .books-section h2 {
+                font-size: 4vw;
+            }
+
             .book-item {
-                width: 45%;
-                max-width: 40vw; /* Adjusted for smaller screens */
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .book-image {
+                width: 30%;
+                margin-right: 0;
+                margin-bottom: 2vh;
+            }
+
+            .book-details {
+                width: 100%;
+                margin-bottom: 2vh;
+            }
+
+            .book-details h3 {
+                font-size: 3.5vw;
+            }
+
+            .book-details p {
+                font-size: 3vw;
+            }
+
+            .delete-btn {
+                width: 100%;
+                font-size: 3vw;
             }
         }
     </style>
 </head>
+
 <body>
+    <%- include("./partials/changeProfileInfoDialog.ejs") %>
     <header>
         <h1>User Profile</h1>
     </header>
     <main>
         <section class="profile-info">
             <div class="profile-picture">
-                <img src="/public/appImages/artistBack.webp" alt="Profile Picture">
+                <img src="<%= locals.user.profileImageURL %>" alt="Profile Picture">
             </div>
             <div class="user-details">
-                <h2>Username: <%= user.userName %></h2>
-                <p>Email: <%= user.email %></p>
-                <p>Number of Reviews: <%= user.reviews.length %></p>
-                <p>Number of Followers: <%= user.followers.length %></p>
-                <p>Number of Purchases: <%= user.purchases.length %></p>
+                <h2>Username: <%= user.userName %>
+                </h2>
+                <p>Email: <%= user.email %>
+                </p>
+                <p>Number of Reviews: <%= user.reviews.length %>
+                </p>
+                <p>Number of Followers: <%= user.followers.length %>
+                </p>
+                <p>Number of Purchases: <%= user.purchases.length %>
+                </p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnForProFileChange">
+                    Change Profile
+                </button>
+                <a href="/auth/getEmailPage"  class="btn btn-primary">
+                    Change Password
+                </a>
             </div>
         </section>
-        <section class="favorite-books">
+        <section class="books-section">
             <h2>Favorite Books</h2>
             <div class="books-list">
-                <% user.favourites.forEach(book => { %>
+                <% user.favourites.forEach(book=> { %>
                     <div class="book-item">
-                        <img src="/<%= book.imageLink %>" alt="<%= book.title %>">
-                        <h3><%= book.title %></h3>
-                        <p>Author(s): <%= book.authors.join(', ') %></p>
+                        <div class="book-image">
+                            <img src="<%= book.imageLink %>" alt="<%= book.title %>">
+                        </div>
+                        <div class="book-details">
+                            <h3>
+                                <%= book.title %>
+                            </h3>
+                            <p>Author(s): <%= book.authors.join(', ') %></p>
+                            <p>Likes: <%= book.likes %></p>
+                        </div>
+                        <button class="delete-btn" data-bookId="<%= book._id%>">Delete</button>
                     </div>
                 <% }); %>
             </div>
         </section>
-        <section class="liked-books">
+        <section class="books-section">
             <h2>Liked Books</h2>
             <div class="books-list">
                 <% user.likedBooks.forEach(book => { %>
                     <div class="book-item">
-                        <img src="<%= book.imageLink%>" alt="<%= book.title %>">
-                        <h3><%= book.title %></h3>
-                        <% console.log(book.authors); %>
-                        <p>Author(s): <%= book.authors %></p>
+                        <div class="book-image">
+                            <img src="<%= book.imageLink%>" alt="<%= book.title %>">
+                        </div>
+                        <div class="book-details">
+                            <h3><%= book.title %></h3>
+                            <p>Author(s): <%= book.authors %></p>
+                            <p>Likes: <%= book.likes %></p>
+                        </div>
+                        <button class="delete-btn" data-bookId="<%= book._id%>">Delete</button>
                     </div>
                 <% }); %>
             </div>
         </section>
     </main>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="/public/dist/myProfile.bundle.js"></script>
+  
 </body>
 </html>

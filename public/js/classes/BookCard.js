@@ -9,6 +9,7 @@ export class BookCard {
       genere,
       imageLink,
       id,
+      inDb = true
   }) {
       this.title = title;
       this.authors = authors;
@@ -17,6 +18,7 @@ export class BookCard {
       this.genere = genere;
       this.imageLink = imageLink;
       this.id = id;
+      this.inDb = inDb
   }
 
   createCard() {
@@ -59,13 +61,15 @@ export class BookCard {
       btnContainer.appendChild(viewButton);
 
       // Delete button
-      const deleteButton = document.createElement('a');
-      deleteButton.href = '#';
-      deleteButton.className = 'btn btn-danger deleteBtn';
-      deleteButton.textContent = 'Delete';
-      deleteButton.setAttribute("data-bookId", this.id);
-      applyDeleteEventListener(deleteButton)
-      btnContainer.appendChild(deleteButton);
+     if (this.inDb) {
+        const deleteButton = document.createElement('a');
+        deleteButton.href = '#';
+        deleteButton.className = 'btn btn-danger deleteBtn';
+        deleteButton.textContent = 'Delete';
+        deleteButton.setAttribute("data-bookId", this.id);
+        applyDeleteEventListener(deleteButton)
+        btnContainer.appendChild(deleteButton);
+     }
 
       cardBody.appendChild(btnContainer);
       card.appendChild(cardBody);

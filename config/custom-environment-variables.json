@@ -2,5 +2,6 @@
     "Book_Hub_APIKEY" : "BookHubAPIKEY",
     "Book_Hub_mongoDbConnectionString" : "mongoDbConnectionString",
     "Book_Hub_PORT" : "BookHubPort",
-    "JWT_SECRET_KEY": "BookHubJWTKEY"
+    "JWT_SECRET_KEY": "BookHubJWTKEY",
+    "Book_Hub_App_Password" : "BookHub_App_Password"
 }

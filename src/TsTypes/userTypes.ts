@@ -9,7 +9,8 @@ export interface IUserModel{
     profileImageURL : string,
     followers : Types.ObjectId[],
     favourites : Types.ObjectId[],
-    likedBooks : Types.ObjectId[]   
+    likedBooks : Types.ObjectId[],
+    lastSearched : string   
 }
 
 export interface IUserMethods{

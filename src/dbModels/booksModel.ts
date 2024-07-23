@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IVolumeInfo } from "../TsTypes/bookTypes";
+import {load } from 'cheerio';
 
 const bookSchema = new mongoose.Schema<IVolumeInfo>({
     title : {
@@ -38,8 +39,22 @@ const bookSchema = new mongoose.Schema<IVolumeInfo>({
     reviews : {
         type : [{type : mongoose.Schema.Types.ObjectId , ref : "Reviews"}],
         default : []
+    },
+    apiId : {
+        type : String,
+        default : "User-Book"
     }
+
 })
+bookSchema.pre("save" , function(){
+    const htmlDescription = this.description;
+    const loaded = load(htmlDescription);
+    this.description = loaded.text();
+})
+
+
+
+
 
 const Book = mongoose.model("Book" , bookSchema)
 

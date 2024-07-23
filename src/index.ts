@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import reviewRouters from "./routers/reviewRouters"
 import { getUserFromRequest } from './controllers/bookControllers';
 import userRoutes from "./routers/userRoutes"
+// import { sendEmail } from './otherApiServices/mailService';
 // import { search } from './otherApiServices/googleBooksApi';
 const app = express();
 app.use(express.json());
@@ -41,7 +42,7 @@ connectToDb();
 
 
 // search();
-
+// sendEmail("revant.sinha@gmail.com", "THIS IS A CODE");
 app.get("/test", (req: Request, res: Response) => {
     res.send("hello!!!!!!!")
 })

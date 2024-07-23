@@ -10,11 +10,10 @@ async function sendDeleteRequest(id) {
     }
 }
 
-export function applyDeleteEventListener(deleteBtn) {
+export function applyDeleteEventListener(deleteBtn, deleteFrom, deletingElement) {
     deleteBtn.addEventListener("click", (e) => {
         const bookId = e.target.getAttribute("data-bookId");
         sendDeleteRequest(bookId);
-        console.log(e.target.parentNode.parentNode.parentNode);
-        e.target.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.parentNode)
+        deleteFrom.removeChild(deletingElement)
     });
 }
