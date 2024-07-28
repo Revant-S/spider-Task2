@@ -37,6 +37,13 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
         }],
         default: []
     },
+    following: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }],
+        default: []
+    },
     purchases: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
@@ -76,6 +83,16 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
     coins : {
         type : Number,
         default : 2000
+    },
+    likedReviews : {
+        type : [mongoose.Schema.Types.ObjectId],
+        ref : "Review",
+        default : []
+    },
+    dislikedReviews: {
+        type : [mongoose.Schema.Types.ObjectId],
+        ref : "Review",
+        default : []
     }
     
 })

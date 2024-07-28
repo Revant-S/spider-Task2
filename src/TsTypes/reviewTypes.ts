@@ -8,9 +8,15 @@ export interface IReview {
     rating: number;
     comment: string;
     createdAt?: Date;
+    comments : commentOnReview[],
+    likes : number,
+    dislikes : number
 }
 
-
+export interface commentOnReview{
+    userId : Types.ObjectId,
+    text : string
+}
 export interface AddReviewRequest extends Request {
     body: {
         bookId: string; 

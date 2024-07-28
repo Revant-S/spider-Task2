@@ -2,6 +2,7 @@ import { api } from "./axiosConfig";
 
 async function addBookToFav(e) {
   try {
+    console.log("CLICKED");
     const response = await api.put("/books/addToFav", {
       bookId: e.target.parentNode.getAttribute("data-id"),
     });
@@ -20,5 +21,6 @@ export function updateIcon(element, to) {
   element.src = to;
 }
 export function handleFav(favBtn) {
+  console.log("HEKLJDOJN:IJBD");
     favBtn.addEventListener("click", addBookToFav);
 }

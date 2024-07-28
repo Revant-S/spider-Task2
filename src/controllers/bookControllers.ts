@@ -8,6 +8,7 @@ import Review from "../dbModels/reviewDbModel";
 import { searchASpecificVolume, searchOnine } from "../otherApiServices/googleBooksApi";
 import mongoose from "mongoose";
 
+
 export interface SearhRequest {
     search: string,
     term: string
@@ -49,24 +50,27 @@ export async function viewBook(req: Request, res: Response) {
     if (!user) return res.send("YOU DONT EXIST");
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
         const bookInDb = await Book.findOne({ apiId: bookId });
+        console.log(bookInDb);
+
         if (!bookInDb) {
             const requiredBook = await searchASpecificVolume(bookId);
             if (!requiredBook) return res.status(400).json({ message: "Resource  Not Found" });
-            
-            let cost : Cost
+
+            let cost: Cost
             if (requiredBook.saleInfo.listPrice) {
                 cost = {
-                    amount : requiredBook.saleInfo.listPrice.amount || 0,
-                    currencyCode  : requiredBook.saleInfo.listPrice.currencyCode  || "INR"
+                    amount: requiredBook.saleInfo.listPrice.amount || 0,
+                    currencyCode: requiredBook.saleInfo.listPrice.currencyCode || "INR"
                 }
-            }else{
+            } else {
                 cost = {
-                    amount : 0,
-                    currencyCode : "Cant Purchase"
+                    amount: 0,
+                    currencyCode: "Cant Purchase"
                 }
             }
-      
-            
+            console.log(requiredBook);
+
+
             const newBook = await Book.create({
                 title: requiredBook.volumeInfo.title,
                 authors: requiredBook.volumeInfo.authors,
@@ -75,30 +79,74 @@ export async function viewBook(req: Request, res: Response) {
                 imageLink: requiredBook.volumeInfo.imageLinks.thumbnail,
                 apiId: requiredBook.id,
                 cost,
-                previewUrl : requiredBook.volumeInfo.previewLink
+                previewUrl: requiredBook.volumeInfo.previewLink,
+                genere: requiredBook.volumeInfo.categories
             });
+            const reviews = await Review.find({ book: newBook._id }).populate([
+                {
+                    path: "user",
+                    select: "email userName profileImageURL _id"
+                },
+                {
+                    path: "comments.userId",
+                    select: "userName email _id profileImageURL"
+                }
+            ]).sort({ createdAt: -1 });
+
             return res.render("individualBook", {
                 book: newBook,
                 likedThisBook: false,
-                favBook: false
+                favBook: false,
+                reviews,
+                loggedUser: user._id,
+                user
             })
         }
+
         const likedIndex = user.likedBooks.indexOf(bookInDb._id);
         const favIndex = user.favourites.indexOf(bookInDb._id);
+        const reviews = await Review.find({ book: bookInDb._id }).populate([
+            {
+                path: "user",
+                select: "email userName profileImageURL _id"
+            },
+            {
+                path: "comments.userId",
+                select: "userName email _id profileImageURL"
+            }
+        ]).sort({ createdAt: -1 });
+
+
         return res.render("individualBook", {
             book: bookInDb,
             likedThisBook: !(likedIndex === -1),
-            favBook: !(favIndex === -1)
+            favBook: !(favIndex === -1),
+            reviews,
+            loggedUser: user._id,
+            user
         })
     }
     const book = await Book.findById(bookId);
     if (!book) return res.send("Book Not Found");
     const likedIndex = user.likedBooks.indexOf(book._id);
     const favIndex = user.favourites.indexOf(book._id);
+    const reviews = await Review.find({ book: book._id }).populate([
+        {
+            path: "user",
+            select: "email userName profileImageURL _id"
+        },
+        {
+            path: "comments.userId",
+            select: "userName email _id profileImageURL"
+        }
+    ]).sort({ createdAt: -1 });
     res.render("individualBook", {
         book,
         likedThisBook: !(likedIndex === -1),
-        favBook: !(favIndex === -1)
+        favBook: !(favIndex === -1),
+        reviews,
+        loggedUser: user._id,
+        user
     })
 }
 
@@ -231,3 +279,19 @@ export async function changeProfileImage(req: Request, res: Response) {
     })
 }
 
+
+export const getAddBookPage = async (req: Request , res : Response)=>{
+    res.render("addBookPage")
+}
+
+export const getMyBooks = async (req : Request , res : Response)=>{
+    const user = await getUserFromRequest(req);
+    if(!user) return res.send("No User Found");
+    await user.populate([{
+        path : "books"
+    }])
+    res.render("myBooks", {
+        user,
+        addRequeired : true 
+    })
+}

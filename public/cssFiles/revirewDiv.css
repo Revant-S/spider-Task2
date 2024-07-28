@@ -1,0 +1,80 @@
+.reviews {
+    margin-top: 3%;
+    height: fit-content;
+}
+
+.hidden {
+    display: none;
+}
+
+.comments {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.commentOnReview {
+    width: 80%;
+    margin-top: 1%;
+    padding: 0.5%;
+}
+
+.reviewDiv,
+.commentDiv {
+    border: 0.05vw solid #e0e0e0;
+    border-radius: 0.5vw;
+    padding: 2%;
+    margin-bottom: 2%;
+    box-shadow: 0 0.1vw 0.2vw rgba(0, 0, 0, 0.1);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5%;
+}
+
+.reviewerImage,
+.commenterImage {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    margin-right: 1.5%;
+    object-fit: cover;
+}
+
+.reviewerEmail,
+.commenterEmail {
+    font-size: 0.9vw;
+    color: #555;
+}
+
+.content {
+    font-size: 1vw;
+    line-height: 1.4;
+    margin-bottom: 1.5%;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5%;
+}
+
+.rating {
+    font-size: 1.1vw;
+    color: #ffc107;
+}
+
+.comments {
+    border-top: 0.05vw solid #e0e0e0;
+    padding-top: 1.5%;
+    font-size: 0.9vw;
+    color: #666;
+}
+.optional{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 3%;
+}

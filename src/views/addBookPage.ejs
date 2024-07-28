@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/headTag.ejs") %>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+        }
+
+        .wholePage {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .outer {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .bookSpace, .bookSpace2 {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            width: 100%;
+            overflow-y: auto;
+        }
+        .bookSpace2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 2rem;
+            grid-gap: 2%;
+            width: 100%;
+            overflow-y: auto;
+        }
+
+        .review-card {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-image {
+            max-width: 150px;
+            max-height: 200px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 8px;
+        }
+
+        .review-content {
+            flex: 1;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-date {
+            color: #888;
+        }
+
+        .review-comment {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 2% 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .link2{
+            text-decoration: none;
+            color: black;
+        }
+        .adjust{
+            max-height: fit-content;
+        }
+      
+    </style>
+    <link rel="stylesheet" href="/public/cssFiles/modalAddBooks.css">
+    <link rel="stylesheet" href="/public/cssFiles/nav.css">
+    <link rel="stylesheet" href="/public/cssFiles/sideBar.css">
+</head>
+
+<body>
+    <div class="outer">
+        <%- include("./partials/sideBar.ejs") %>
+     
+        <div class="wholePage">
+            <%- include("./partials/navBar.ejs") %>
+            <h1>Search For Books</h1>
+            <div class="bookSpace">
+                <div class="upper">
+                    <%- include("./partials/searchBar.ejs") %>
+                </div>
+                <div class="bookSpace2"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/public/dist/home.bundle.js" type="module"></script>
+</body>
+
+</html>

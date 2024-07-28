@@ -26,6 +26,24 @@ const reviewSchema = new mongoose.Schema<IReview>({
         type: Date,
         default: Date.now,
     },
+    comments : {
+        type : [{
+            userId: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "User"
+            },
+            text: String
+          }],
+        default : []
+    },
+    likes : {
+        type : Number,
+        default : 0
+    },
+    dislikes : {
+        type : Number,
+        default : 0
+    }
 });
 
 const Review = mongoose.model("Review", reviewSchema);

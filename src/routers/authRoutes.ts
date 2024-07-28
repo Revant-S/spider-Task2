@@ -4,7 +4,8 @@ import {
     assignTempPassword,
     resetPasswordPage,
     getEmailPage,
-    resetPasswordInDb
+    resetPasswordInDb,
+    enterWithGoogle
 } from "../controllers/authControllers";
 
 const router = Router();
@@ -18,5 +19,5 @@ router.get("/getEmailPage", getEmailPage)
 router.post("/getCode", assignTempPassword)
 router.get("/resetPassword", resetPasswordPage)
 router.post("/resetPassword",resetPasswordInDb)
-
+router.get("/google/redirect", enterWithGoogle)
 export default router

@@ -1,0 +1,90 @@
+<div class="reviews">
+    <% if (locals.reviews && locals.reviews.length> 0) { %>
+        <% locals.reviews.forEach(review=> { %>
+            <div class="reviewDiv" data-review-id="<%= review._id %>">
+                <div class="optional">
+                    <div class="btns">
+                        <!-- <div class="rating">
+                            
+                        </div> -->
+                        <% if (user.likedReviews.includes(review._id)) { %>
+                            <button class="btn btn-sm btn-primary likeBtn mt-3 mr-5 Liked likeReview"
+                                data-review-id="<%= review._id %>">
+                                Like <span class="likeCount">(<%= review.likes %>)</span>
+                            </button>
+                            <% }else{ %>
+                                <button class="btn btn-sm btn-outline-primary likeBtn mt-3 mr-5 likeReview"
+                                    data-review-id="<%= review._id %>">
+                                    Like <span class="likeCount">(<%= review.likes %>)</span>
+                                </button>
+                                <% } %>
+                                    <% if (user.dislikedReviews.includes(review._id)) { %>
+                                        <button class="btn btn-sm btn-danger dislikeBtn mt-3 ml-5 Disliked dislikeReview"
+                                            data-review-id="<%= review._id %>">
+                                            Dislike <span class="dislikeCount">(<%= review.dislikes %>)</span>
+                                        </button>
+                                        <% }else{ %>
+                                            <button class="btn btn-sm btn-outline-danger dislikeBtn mt-3 ml-5 dislikeReview"
+                                                data-review-id="<%= review._id %>" >
+                                                Dislike <span class="dislikeCount">(<%= review.dislikes %>)</span>
+                                            </button>
+                                            <% } %>
+                                                <!-- 
+                        <button class="btn btn-sm btn-outline-primary likeBtn mt-3 mr-5" data-review-id="<%= review._id %>" class="likeReview">
+                            Like <span class="likeCount">(<%= review.likes %>)</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger dislikeBtn mt-3 ml-5" data-review-id="<%= review._id %>" class="dislikeReview">
+                            Dislike <span class="dislikeCount">(<%= review.dislikes %>)</span>
+                        </button> -->
+                    </div>
+                    <% if (review.user._id.toString()==locals.loggedUser.toString()) { %>
+                        <button class="btn btn-outline-success updateEdit hidden"
+                            data-reviewId="<%= review._id %>">Update</button>
+                        <button class="btn btn-outline-danger cancel hidden">Cancel</button>
+                        <button class="btn btn-outline-danger deleteReview" data-reviewId="<%= review._id %>">Delete
+                            Review</button>
+                        <button class="btn btn-outline-primary editReview" data-reviewId="<%= review._id %>">Edit
+                            Review</button>
+                        <% } %>
+                </div>
+                <div class="userInfo">
+                    <img src="<%= review.user.profileImageURL %>" class="reviewerImage">
+                    <div class="reviewerEmail">
+                        <%= review.user.email %>
+                    </div>
+                </div>
+                <div class="content">
+                    <%= review.comment %>
+                </div>
+
+                <div class="parent">
+                    <button class="btn btn-primary addCommentBtn" data-reviewId="<%= review._id %>">Add a
+                        Comment</button>
+                    <button class="btn btn-primary postCommentBtn hidden"
+                        data-reviewId="<%= review._id %>">Post</button>
+                    <input type="text" class="commentOnReview hidden" placeholder="Comment....">
+                </div>
+                <div class="comments">
+                    <% if (review.comments && review.comments.length> 0) { %>
+                        <h5>Comments</h5>
+                        <% review.comments.forEach(comment=> { %>
+                            <div class="commentDiv">
+                                <div class="userInfo">
+                                    <img src="<%= comment.userId.profileImageURL %>" alt="" class="commenterImage">
+                                    <div class="commenterEmail">
+                                        <%= comment.userId.email %>
+                                    </div>
+                                </div>
+                                <div class="commentContent">
+                                    <%= comment.text %>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } %>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <p>No reviews yet.</p>
+                    <% } %>
+</div>

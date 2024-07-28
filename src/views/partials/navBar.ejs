@@ -14,14 +14,12 @@
           <a class="nav-link active" aria-current="page" href="/purchase/myPurchases">My Purchases</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Books Created By Me</a>
+          <a class="nav-link active" aria-current="page" href="/books/myBooks">My Books</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2 w-40" type="search" placeholder="Search For Books Online" aria-label="Search"
-          id="searchBar">
-        <button class="btn btn-outline-success" type="button" id="searchBtn">Search</button>
-      </form>
+    <% if (locals.addRequeired) { %>
+      <%- include("./addNewBookBtn.ejs") %>
+    <% } %>
     </div>
   </div>
 </nav>

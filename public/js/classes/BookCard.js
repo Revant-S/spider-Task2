@@ -32,7 +32,7 @@ export class BookCard {
       img.className = 'card-img-top cardImage';
       img.alt = this.title;
       card.appendChild(img);
-
+      card.classList.add("adjust")
       // Card body
       const cardBody = document.createElement('div');
       cardBody.className = 'card-body';
@@ -60,8 +60,7 @@ export class BookCard {
       viewButton.textContent = 'View Details';
       btnContainer.appendChild(viewButton);
 
-      // Delete button
-     if (this.inDb) {
+
         const deleteButton = document.createElement('a');
         deleteButton.href = '#';
         deleteButton.className = 'btn btn-danger deleteBtn';
@@ -69,8 +68,7 @@ export class BookCard {
         deleteButton.setAttribute("data-bookId", this.id);
         applyDeleteEventListener(deleteButton)
         btnContainer.appendChild(deleteButton);
-     }
-
+    
       cardBody.appendChild(btnContainer);
       card.appendChild(cardBody);
 

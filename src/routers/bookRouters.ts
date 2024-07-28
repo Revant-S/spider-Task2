@@ -6,7 +6,9 @@ import {
     toggleFavoriteBook,
     deleteBook,
     searchTheBookOnline,
-    changeProfileImage
+    changeProfileImage,
+    getAddBookPage,
+    getMyBooks
 } from "../controllers/bookControllers";
 import { MulterUploadService } from "../middlewares/uploadServices";
 import path from "path";
@@ -25,5 +27,7 @@ router.put("/addToFav", toggleFavoriteBook)
 router.delete("/deleteBook/:bookId", deleteBook)
 router.get("/search", searchTheBookOnline)
 router.put("/changeProfileImage" ,profileUploadMiddleWare.single('profileImage') , changeProfileImage )
+router.get("/addBook",getAddBookPage )
+router.get("/myBooks", getMyBooks)
 
 export default router

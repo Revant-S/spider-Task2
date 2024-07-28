@@ -3,256 +3,261 @@
 
 <head>
     <%- include("./partials/headTag.ejs") %>
-    <link rel="stylesheet" href="/public/cssFiles/profileChangeDialog.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        <link rel="stylesheet" href="/public/cssFiles/profileChangeDialog.css">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
 
-        html,
-        body {
-            height: 100%;
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-        }
+            html,
+            body {
+                height: 100%;
+                font-family: 'Arial', sans-serif;
+                background-color: #f0f0f0;
+            }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 2vh 0;
-        }
+            header {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 2vh 0;
+            }
 
-        main {
-            padding: 3vh 5vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .profile-info {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 90%;
-            margin-bottom: 5vh;
-            background-color: #fff;
-            border-radius: 2vw;
-            padding: 3vh 3vw;
-            box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-picture {
-            width: 30%;
-            max-width: 20vw;
-        }
-
-        .profile-picture img {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
-        }
-
-        .user-details {
-            width: 65%;
-        }
-
-        .user-details h2 {
-            font-size: 2.5vw;
-            margin-bottom: 1.5vh;
-            color: #333;
-        }
-
-        .user-details p {
-            font-size: 1.5vw;
-            margin-bottom: 1vh;
-            color: #666;
-        }
-
-        .books-section {
-            width: 90%;
-            margin-bottom: 5vh;
-            background-color: #fff;
-            border-radius: 2vw;
-            padding: 3vh 3vw;
-            box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
-        }
-
-        .books-section h2 {
-            font-size: 2.5vw;
-            margin-bottom: 2vh;
-            color: #333;
-        }
-
-        .books-list {
-            height: 50vh;
-            overflow-y: auto;
-        }
-
-        .book-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2vh;
-            padding: 2vh 2vw;
-            background-color: #f9f9f9;
-            border-radius: 1vw;
-            transition: transform 0.3s ease;
-        }
-
-        .book-item:hover {
-            transform: translateY(-0.5vh);
-        }
-
-        .book-image {
-            width: 15%;
-            margin-right: 3vw;
-        }
-
-        .book-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5vw;
-            box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.1);
-        }
-
-        .book-details {
-            width: 70%;
-        }
-
-        .book-details h3 {
-            font-size: 1.8vw;
-            margin-bottom: 1vh;
-            color: #333;
-        }
-
-        .book-details p {
-            font-size: 1.3vw;
-            color: #666;
-            margin-bottom: 0.5vh;
-        }
-
-        .delete-btn {
-            width: 15%;
-            background-color: #ff4d4d;
-            color: #fff;
-            border: none;
-            padding: 1vh 1vw;
-            font-size: 1.2vw;
-            border-radius: 0.5vw;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            background-color: #ff3333;
-        }
-
-        @media (max-width: 768px) {
-            .profile-info {
+            main {
+                padding: 3vh 5vw;
+                display: flex;
                 flex-direction: column;
                 align-items: center;
             }
 
+            .profile-info {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                width: 90%;
+                margin-bottom: 5vh;
+                background-color: #fff;
+                border-radius: 2vw;
+                padding: 3vh 3vw;
+                box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
+            }
+
             .profile-picture {
-                width: 50%;
-                max-width: 30vw;
-                margin-bottom: 3vh;
+                width: 30%;
+                max-width: 20vw;
+            }
+
+            .profile-picture img {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
             }
 
             .user-details {
-                width: 100%;
-                text-align: center;
+                width: 65%;
             }
 
             .user-details h2 {
-                font-size: 4vw;
+                font-size: 2.5vw;
+                margin-bottom: 1.5vh;
+                color: #333;
             }
 
             .user-details p {
-                font-size: 3vw;
+                font-size: 1.5vw;
+                margin-bottom: 1vh;
+                color: #666;
+            }
+
+            .books-section {
+                width: 90%;
+                margin-bottom: 5vh;
+                background-color: #fff;
+                border-radius: 2vw;
+                padding: 3vh 3vw;
+                box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.1);
             }
 
             .books-section h2 {
-                font-size: 4vw;
+                font-size: 2.5vw;
+                margin-bottom: 2vh;
+                color: #333;
+            }
+
+            .books-list {
+                height: 50vh;
+                overflow-y: auto;
             }
 
             .book-item {
-                flex-direction: column;
-                align-items: flex-start;
+                display: flex;
+                align-items: center;
+                margin-bottom: 2vh;
+                padding: 2vh 2vw;
+                background-color: #f9f9f9;
+                border-radius: 1vw;
+                transition: transform 0.3s ease;
+            }
+
+            .book-item:hover {
+                transform: translateY(-0.5vh);
             }
 
             .book-image {
-                width: 30%;
-                margin-right: 0;
-                margin-bottom: 2vh;
+                width: 15%;
+                margin-right: 3vw;
+            }
+
+            .book-image img {
+                width: 100%;
+                height: auto;
+                border-radius: 0.5vw;
+                box-shadow: 0 0.3vh 0.6vh rgba(0, 0, 0, 0.1);
             }
 
             .book-details {
-                width: 100%;
-                margin-bottom: 2vh;
+                width: 70%;
             }
 
             .book-details h3 {
-                font-size: 3.5vw;
+                font-size: 1.8vw;
+                margin-bottom: 1vh;
+                color: #333;
             }
 
             .book-details p {
-                font-size: 3vw;
+                font-size: 1.3vw;
+                color: #666;
+                margin-bottom: 0.5vh;
             }
 
             .delete-btn {
-                width: 100%;
-                font-size: 3vw;
+                width: 15%;
+                background-color: #ff4d4d;
+                color: #fff;
+                border: none;
+                padding: 1vh 1vw;
+                font-size: 1.2vw;
+                border-radius: 0.5vw;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
             }
-        }
-    </style>
+
+            .delete-btn:hover {
+                background-color: #ff3333;
+            }
+
+            @media (max-width: 768px) {
+                .profile-info {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .profile-picture {
+                    width: 50%;
+                    max-width: 30vw;
+                    margin-bottom: 3vh;
+                }
+
+                .user-details {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .user-details h2 {
+                    font-size: 4vw;
+                }
+
+                .user-details p {
+                    font-size: 3vw;
+                }
+
+                .books-section h2 {
+                    font-size: 4vw;
+                }
+
+                .book-item {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .book-image {
+                    width: 30%;
+                    margin-right: 0;
+                    margin-bottom: 2vh;
+                }
+
+                .book-details {
+                    width: 100%;
+                    margin-bottom: 2vh;
+                }
+
+                .book-details h3 {
+                    font-size: 3.5vw;
+                }
+
+                .book-details p {
+                    font-size: 3vw;
+                }
+
+                .delete-btn {
+                    width: 100%;
+                    font-size: 3vw;
+                }
+            }
+        </style>
 </head>
 
 <body>
     <%- include("./partials/changeProfileInfoDialog.ejs") %>
-    <header>
-        <h1>User Profile</h1>
-    </header>
-    <main>
-        <section class="profile-info">
-            <div class="profile-picture">
-                <img src="<%= locals.user.profileImageURL %>" alt="Profile Picture">
-            </div>
-            <div class="user-details">
-                <h2>Username: <%= user.userName %>
-                </h2>
-                <p>Email: <%= user.email %>
-                </p>
-                <p>Number of Reviews: <%= user.reviews.length %>
-                </p>
-                <p>Number of Followers: <%= user.followers.length %>
-                </p>
-                <p>Number of Purchases: <%= user.purchases.length %>
-                </p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btnForProFileChange">
-                    Change Profile
-                </button>
-                <a href="/auth/getEmailPage"  class="btn btn-primary">
-                    Change Password
-                </a>
-            </div>
-        </section>
-        <section class="books-section">
-            <h2>Favorite Books</h2>
-            <div class="books-list">
-                <% user.favourites.forEach(book=> { %>
-                    <div class="book-item">
-                        <div class="book-image">
-                            <img src="<%= book.imageLink %>" alt="<%= book.title %>">
-                        </div>
-                        <div class="book-details">
-                            <h3>
-                                <%= book.title %>
-                            </h3>
-                            <p>Author(s): <%= book.authors.join(', ') %></p>
+        <header>
+            <h1>User Profile</h1>
+        </header>
+        <main>
+            <section class="profile-info">
+                <div class="profile-picture">
+                    <img src="<%= locals.user.profileImageURL %>" alt="Profile Picture">
+                </div>
+                <div class="user-details">
+                    <h2>Username: <%= user.userName %>
+                    </h2>
+                    <p>Email: <%= user.email %>
+                    </p>
+                    <p>Number of Reviews: <%= user.reviews.length %>
+                    </p>
+                    <p>Number of Followers: <%= user.followers.length %>
+                    </p>
+                    <p>Number of Purchases: <%= user.purchases.length %>
+                    </p>
+                    <p>Coins Left: INR <%= user.coins %>
+
+                    </p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop" id="btnForProFileChange">
+                        Change Profile
+                    </button>
+                    <a href="/auth/getEmailPage" class="btn btn-primary">
+                        Change Password
+                    </a>
+                </div>
+            </section>
+            <section class="books-section">
+                <h2>Favorite Books</h2>
+                <div class="books-list">
+                    <% user.favourites.forEach(book=> { %>
+                        <div class="book-item">
+                            <div class="book-image">
+                                <a href="/books/viewbook/<%= book._id %>"><img src="<%= book.imageLink%>"
+                                        alt="<%= book.title %>"></a>
+                            </div>
+                            <div class="book-details">
+                                <h3>
+                                    <%= book.title %>
+                                </h3>
+                                <p>Author(s): <%= book.authors.join(', ') %></p>
                             <p>Likes: <%= book.likes %></p>
                         </div>
                         <button class="delete-btn" data-bookId="<%= book._id%>">Delete</button>
@@ -266,7 +271,7 @@
                 <% user.likedBooks.forEach(book => { %>
                     <div class="book-item">
                         <div class="book-image">
-                            <img src="<%= book.imageLink%>" alt="<%= book.title %>">
+                            <a href = "/books/viewbook/<%= book._id %>"><img src="<%= book.imageLink%>" alt="<%= book.title %>"></a>
                         </div>
                         <div class="book-details">
                             <h3><%= book.title %></h3>
@@ -274,6 +279,24 @@
                             <p>Likes: <%= book.likes %></p>
                         </div>
                         <button class="delete-btn" data-bookId="<%= book._id%>">Delete</button>
+                    </div>
+                <% }); %>
+            </div>
+        </section>
+        <section class="books-section">
+            <h2>My Reviews</h2>
+            <div class="books-list">
+                <% user.reviews.forEach(review => { %>
+                    <div class="book-item">
+                        <div class="book-image">
+                            <a href= "/books/viewbook/<%= review.book._id %>"><img src="<%= review.book.imageLink%>"></a>
+                        </div>
+                        <div class="book-details">
+                            <h3><%= review.book.title %></h3>
+                            <p>Your Review: <%= review.comment %></p>
+                            <p>Likes: <%= review.likes %></p>
+                        </div>
+                        <button class="delete-btn" data-bookId="<%= review._id%>">Delete  Review </button>
                     </div>
                 <% }); %>
             </div>

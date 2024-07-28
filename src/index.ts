@@ -12,8 +12,7 @@ import reviewRouters from "./routers/reviewRouters"
 import { getUserFromRequest } from './controllers/bookControllers';
 import userRoutes from "./routers/userRoutes"
 import purchaseRoutes from "./routers/purchaseEndPoints"
-// import { sendEmail } from './otherApiServices/mailService';
-// import { search } from './otherApiServices/googleBooksApi';
+import { getFriendReviews } from './controllers/reviewControllers';
 const app = express();
 app.use(express.json());
 app.use(cookieParser("token"));
@@ -25,8 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/books", authoriseUser);
 app.use("/books", bookRoutes);
 app.use("/auth", authRoutes);
-app.use("/review", authoriseUser);
-app.use("/review", reviewRouters);
+app.use("/review", authoriseUser,reviewRouters);
 app.use("/user", authoriseUser)
 app.use("/user",userRoutes)
 app.use("/purchase", authoriseUser);
@@ -44,17 +42,15 @@ async function connectToDb() {
 connectToDb();
 
 
-app.get("/test", (req: Request, res: Response) => {
-    res.send("hello!!!!!!!")
-})
 app.get("/home", authoriseUser, async (req: Request, res: Response) => {
     const user = await getUserFromRequest(req);
     if(!user) return res.send("You Dont exist");
-    const populatedUser = await user.populate([{
-        path : "books",
-    }])
-    
+ 
+    const userInfo = await getFriendReviews(req);
+    if (!userInfo) {
+        return res.send("Something went Wrong")
+    }
     res.render("home", {
-        books : populatedUser.books 
+        userInfo
     })
 })

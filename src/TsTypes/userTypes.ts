@@ -11,7 +11,10 @@ export interface IUserModel{
     favourites : Types.ObjectId[],
     likedBooks : Types.ObjectId[],
     lastSearched : string,
-    coins : number   
+    coins : number  ,
+    likedReviews : Types.ObjectId[], 
+    dislikedReviews : Types.ObjectId[], 
+    following : Types.ObjectId[]
 }
 
 export interface IUserMethods{
