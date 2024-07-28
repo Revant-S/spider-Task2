@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
     },
     profileImageURL: {
         type: String,
-        default: ""
+        default: "/public/appImages/artistBack.webp"
     },
     books: {
         type: [{

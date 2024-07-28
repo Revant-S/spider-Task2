@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { searchForFilters } from "../otherApiServices/googleBooksApi";
 import { FilterParams } from "../otherApiServices/googleBooksApi";
+import { getUserFromRequest } from "./bookControllers";
 
 
 export const getFilterPage = async (req: Request, res: Response) => {
+    const user = await getUserFromRequest(req)
     res.render("filterPage", {
-        filterRequired: true
+        filterRequired: true,
+        user
     })
 }
 

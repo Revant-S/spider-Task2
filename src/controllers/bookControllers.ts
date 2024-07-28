@@ -284,7 +284,10 @@ export async function changeProfileImage(req: Request, res: Response) {
 
 
 export const getAddBookPage = async (req: Request , res : Response)=>{
-    res.render("addBookPage")
+    const user = await getUserFromRequest(req);
+    res.render("addBookPage", {
+        user
+    })
 }
 
 export const getMyBooks = async (req : Request , res : Response)=>{
