@@ -10,10 +10,9 @@ module.exports = {
     searchUser : "./public/js/searchUser.js",
     likeBtnHandler : "./public/js/utils/folloRequestHandler.js",
     reviewHandler : "./public/js/utils/reviewHandler.js",
-    authGoogle : "./public/js/googleOAuth.js",
     myBooks : "./public/js/utils/addNewBook.js",
     filterHandler : "./public/js/utils/filterHandler.js",
-    reviewStarHandler : "./public/js/utils/reviewStarHandler.js"
+    
   },
   output: {
     filename: "[name].bundle.js",
