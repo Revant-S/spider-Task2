@@ -51,50 +51,73 @@ const userSchema = new mongoose.Schema<IUserModel, UserModel, IUserMethods>({
         }],
         default: []
     },
+    cart: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        }],
+        default: []
+    },
     profileImageURL: {
         type: String,
         default: ""
     },
-    books : {
-        type : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Book"
+    books: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
         }],
-        default : []
+        default: []
     },
-    favourites : {
-        type : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Book"
+    favourites: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
         }],
-        default : []
+        default: []
     },
-    likedBooks : {
-        type : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Book"
+    likedBooks: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
         }],
-        default : []
+        default: []
     },
-    lastSearched : {
-        type : String,
-        default : ""
+    lastSearched: {
+        type: String,
+        default: ""
     },
-    coins : {
-        type : Number,
-        default : 2000
+    coins: {
+        type: Number,
+        default: 2000
     },
-    likedReviews : {
-        type : [mongoose.Schema.Types.ObjectId],
-        ref : "Review",
-        default : []
+    likedReviews: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Review",
+        default: []
     },
     dislikedReviews: {
-        type : [mongoose.Schema.Types.ObjectId],
-        ref : "Review",
-        default : []
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Review",
+        default: []
+    },
+    starGiven: {
+        type: [{
+            ratingGiven: {
+                type: Number,
+                required: true,
+                min: 1,
+                max: 5
+            },
+            review: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Review',
+                required: true
+            }
+        }],
+        default: []
     }
-    
+
 })
 
 

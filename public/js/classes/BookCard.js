@@ -49,11 +49,9 @@ export class BookCard {
       description.textContent = this.description;
       cardBody.appendChild(description);
 
-      // Button container
       const btnContainer = document.createElement('div');
       btnContainer.className = 'btn-container';
 
-      // View Details button
       const viewButton = document.createElement('a');
       viewButton.href = `/books/viewBook/${this.id}`;
       viewButton.className = 'btn btn-primary';
@@ -61,13 +59,14 @@ export class BookCard {
       btnContainer.appendChild(viewButton);
 
 
-        const deleteButton = document.createElement('a');
-        deleteButton.href = '#';
+       if (!this.inDb) {
+        const deleteButton = document.createElement("button");
         deleteButton.className = 'btn btn-danger deleteBtn';
         deleteButton.textContent = 'Delete';
         deleteButton.setAttribute("data-bookId", this.id);
         applyDeleteEventListener(deleteButton)
         btnContainer.appendChild(deleteButton);
+       }
     
       cardBody.appendChild(btnContainer);
       card.appendChild(cardBody);

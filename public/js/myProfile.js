@@ -6,7 +6,6 @@ const changeProfileImageForm = document.getElementById("changeProfileImageForm")
 changeProfileImageForm.addEventListener("submit" , async (e)=>{
     const url = window.location.href
     e.preventDefault();
-    console.log("HELLO");
     const newForm = new FormData(changeProfileImageForm);
   try {
     const response = await api.put("/books/changeProfileImage", newForm , {

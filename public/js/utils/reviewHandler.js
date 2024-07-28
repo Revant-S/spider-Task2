@@ -132,7 +132,7 @@ document.querySelectorAll(".likeReview").forEach((btn) => {
     let amt = 1;
     if (e.target.classList.contains("Liked")) {
       amt = -1;
-      e.target.classList.remove("Liked")
+      e.target.classList.remove("Liked");
     }
     await respondToReviewResponse(
       e.target.getAttribute("data-review-id"),
@@ -146,7 +146,7 @@ document.querySelectorAll(".dislikeReview").forEach((btn) => {
     let amt = 1;
     if (e.target.classList.contains("Disliked")) {
       amt = -1;
-      e.target.classList.remove("Disliked")
+      e.target.classList.remove("Disliked");
     }
     await respondToReviewResponse(
       e.target.getAttribute("data-review-id"),

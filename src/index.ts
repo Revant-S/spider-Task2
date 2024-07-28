@@ -13,6 +13,7 @@ import { getUserFromRequest } from './controllers/bookControllers';
 import userRoutes from "./routers/userRoutes"
 import purchaseRoutes from "./routers/purchaseEndPoints"
 import { getFriendReviews } from './controllers/reviewControllers';
+import filterRouters from "./routers/filterRoutes"
 const app = express();
 app.use(express.json());
 app.use(cookieParser("token"));
@@ -28,7 +29,8 @@ app.use("/review", authoriseUser,reviewRouters);
 app.use("/user", authoriseUser)
 app.use("/user",userRoutes)
 app.use("/purchase", authoriseUser);
-app.use("/purchase",purchaseRoutes )
+app.use("/purchase",purchaseRoutes );
+app.use("/filter", authoriseUser, filterRouters)
 async function connectToDb() {
     try {
         await mongoose.connect(config.get("Book_Hub_mongoDbConnectionString"));

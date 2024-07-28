@@ -10,7 +10,8 @@ export interface IReview {
     createdAt?: Date;
     comments : commentOnReview[],
     likes : number,
-    dislikes : number
+    dislikes : number,
+    numberOfRatings : number
 }
 
 export interface commentOnReview{

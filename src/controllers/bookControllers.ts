@@ -140,13 +140,16 @@ export async function viewBook(req: Request, res: Response) {
             select: "userName email _id profileImageURL"
         }
     ]).sort({ createdAt: -1 });
+    const userStar = user.starGiven;
+
     res.render("individualBook", {
         book,
         likedThisBook: !(likedIndex === -1),
-        favBook: !(favIndex === -1),
+        favBook: (favIndex === -1),
         reviews,
         loggedUser: user._id,
-        user
+        user,
+        userStar
     })
 }
 

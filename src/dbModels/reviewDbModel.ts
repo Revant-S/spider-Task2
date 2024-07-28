@@ -43,8 +43,14 @@ const reviewSchema = new mongoose.Schema<IReview>({
     dislikes : {
         type : Number,
         default : 0
+    },
+    numberOfRatings :{ type : Number,
+        default : 0
     }
 });
+
+
+
 
 const Review = mongoose.model("Review", reviewSchema);
 

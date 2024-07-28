@@ -4,9 +4,7 @@
             <div class="reviewDiv" data-review-id="<%= review._id %>">
                 <div class="optional">
                     <div class="btns">
-                        <!-- <div class="rating">
-                            
-                        </div> -->
+                        
                         <% if (user.likedReviews.includes(review._id)) { %>
                             <button class="btn btn-sm btn-primary likeBtn mt-3 mr-5 Liked likeReview"
                                 data-review-id="<%= review._id %>">

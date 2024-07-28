@@ -11,10 +11,10 @@ export async function sendSearchRequest(searchBar) {
 
 
 
-export function applySearchEventListener(searchBtn, searchBar,cb) {
+export function applySearchEventListener(searchBtn, searchBar,cb, bookSpace, books) {
   searchBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const response = await sendSearchRequest(searchBar)
-    cb(response.data.data.items)
+    cb(response.data.data.items, bookSpace, books)
   });
 }

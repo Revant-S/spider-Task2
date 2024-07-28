@@ -14,8 +14,16 @@ export interface IUserModel{
     coins : number  ,
     likedReviews : Types.ObjectId[], 
     dislikedReviews : Types.ObjectId[], 
-    following : Types.ObjectId[]
+    following : Types.ObjectId[],
+    cart : Types.ObjectId[],
+    starGiven : starObj[]
 }
+
+export interface starObj {
+    ratingGiven : number,
+    review : Types.ObjectId
+}
+
 
 export interface IUserMethods{
     getAuthToken() : string

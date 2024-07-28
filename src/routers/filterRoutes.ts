@@ -1,10 +1,10 @@
-// import { Router } from "express";
-// import { getFilterPage } from "../controllers/filterControllers";
+import { Router } from "express";
+import { getFilterPage,getFilterResults } from "../controllers/filterControllers";
 
-// const router = Router();
+const router = Router();
 
-// router.get("/getFilterPage", getFilterPage)
+router.get("/getFilterPage", getFilterPage)
+router.get("/getFilteredBooks", getFilterResults)
 
 
-
-// export default router
+export default router
