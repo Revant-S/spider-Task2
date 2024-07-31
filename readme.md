@@ -22,7 +22,7 @@ BookHubJWTKEY="YOUR_JWT_KEY"
 BookHub_App_Password="Your google account app password"
 ```
 
-- To get the google api key go to https://console.cloud.google.com and create a new project and enable the google books api.  
+- To get the google api key go to [this link](https://console.cloud.google.com) and create a new project and enable the google books api.  
 - Create the credentials for the api and get the api key and place it in the .env file in  place of "YOUR_Google_Books API_KEY" 
 - Get Your google account password after enabling the 2 step verification for your google password.
 
