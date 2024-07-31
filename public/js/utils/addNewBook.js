@@ -1,4 +1,3 @@
-// import { applyDeleteEventListener } from "./utils/deleteBookHandler";
 import { applyDeleteEventListener } from "./deleteBookHandler";
 import { api } from "./axiosConfig";
 import { BookCard } from "../classes/BookCard";
@@ -6,7 +5,7 @@ const faliureAlert = document.getElementById("faliureAlert");
 const sucessAlert = document.getElementById("sucessAlert");
 const bookForm = document.getElementById("bookSubmitForm");
 const modal = document.getElementById("staticBackdrop");
-const deleteBtns = document.querySelectorAll("deleteBtn")
+const deleteBtns = document.querySelectorAll(".deleteBtn")
 const bookSpace = document.querySelector(".bookSpace2");
 
 const books = [];
@@ -40,22 +39,26 @@ async function addBook(e) {
         genere: response.data.bookDetails.genere,
         imageLink: response.data.bookDetails.imageLink,
         id: response.data.bookDetails._id,
+        inDb : true
       });
       books.push(bookCard);
       const card = bookCard.createCard();
       bookSpace.appendChild(card);
-      console.log(card);
+      window.location.reload()
     }
   } catch (error) {
     console.error("Error adding book:", error);
     faliureAlert.innerText = "SomeThing Went Wrong";
-    faliureAlert.classList.remove("hideAlert");
+    faliureAlert.classList.toggle("hideAlert");
   }
 }
 
 bookForm.addEventListener("submit", addBook);
 
 deleteBtns.forEach((deleteBtn) => {
+  console.log(deleteBtn);
+  console.log(bookSpace);
+  console.log(deleteBtn.parentNode.parentNode);
   applyDeleteEventListener(
     deleteBtn,
     bookSpace,

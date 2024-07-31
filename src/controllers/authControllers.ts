@@ -87,11 +87,7 @@ export async function resetPasswordInDb(req : Request , res : Response) {
     if(!verified) return res.send("Incorrect Passcode");
     user.password = newPassword;
     await user.save()
-    return res.send("PassWord is reset Sucessfully!!!");
+    return res.redirect("/auth/signin");
 }
 
 
-export const enterWithGoogle = async (req : Request , res : Response)=>{
-    console.log(req.query);
-    return res.redirect("/auth/signin")
-}

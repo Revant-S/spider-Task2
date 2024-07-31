@@ -14,6 +14,9 @@ export function applyDeleteEventListener(deleteBtn, deleteFrom, deletingElement)
     deleteBtn.addEventListener("click", (e) => {
         const bookId = e.target.getAttribute("data-bookId");
         sendDeleteRequest(bookId);
+        console.log(deleteBtn);
+        console.log(deleteFrom);
+        console.log(deletingElement);
         deleteFrom.removeChild(deletingElement)
     });
 }

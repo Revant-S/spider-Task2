@@ -11,7 +11,7 @@ export function populateBookSpace(data, bookSpace, books, inDb) {
       publisher: book.volumeInfo.publisher,
       description: book.volumeInfo.description,
       imageLink: book.volumeInfo.imageLinks.thumbnail,
-      genere: "HELLO",
+      genere: "",
       inDb,
       id: book.id,
     });

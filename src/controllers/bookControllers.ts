@@ -7,6 +7,8 @@ import Book from "../dbModels/booksModel";
 import Review from "../dbModels/reviewDbModel";
 import { searchASpecificVolume, searchOnine } from "../otherApiServices/googleBooksApi";
 import mongoose from "mongoose";
+import { unlink } from "fs";
+// import { string } from "zod";
 
 
 export interface SearhRequest {
@@ -17,6 +19,14 @@ export async function getUserFromRequest(req: Request) {
     const userId = (req as UserRequest).userJwtPayLoad.id
     return await User.findById(userId);
 }
+export const deleteTheBookFromServer = async (filePath : string)=>{
+    return await unlink(filePath , ()=>{
+        console.log(`file is deleted from the server`);
+    })
+}
+
+
+
 export async function createBookEntry(body: bookBody, fileName: string | undefined) {
     const authorsArray: string[] = JSON.parse(body.authors);
     return await Book.create({
@@ -225,7 +235,12 @@ export async function deleteBook(req: Request, res: Response) {
     const bookId = req.params.bookId;
 
     try {
+        const book = await Book.findById(bookId);
+        if(!book) return res.send("Book Not Found!")
         await Book.findByIdAndDelete(bookId);
+    console.log(book.imageLink);
+    
+        await deleteTheBookFromServer(book?.imageLink)
         await User.updateMany(
             {
                 $or: [

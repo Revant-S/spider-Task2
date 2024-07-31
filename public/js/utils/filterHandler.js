@@ -15,17 +15,11 @@ form.addEventListener("submit", async (event) => {
   if(document.getElementById("author")){const author = document.getElementById("author").value.trim();}
   author = document.getElementById("author").value.trim();
   const genre = document.getElementById("genre").value.trim();
-  const minPrice = document.getElementById("minPrice").value.trim();
-  const maxPrice = document.getElementById("maxPrice").value.trim();
   const priceRange = [];
-  if (minPrice) priceRange.push(minPrice);
-  if (maxPrice) priceRange.push(maxPrice);
 
   const params = {
     author: author || undefined,
     genre: genre || undefined,
-    minPrice: minPrice || undefined,
-    maxPrice: maxPrice || undefined,
     keyWord,
     price: priceRange.length ? priceRange.join(",") : undefined,
   };
@@ -34,7 +28,7 @@ form.addEventListener("submit", async (event) => {
     const response = await api.get("/filter/getFilteredBooks", { params: params });
     console.log(response.data);
     console.log("Filter results:", response.data);
-    books = populateBookSpace(response.data, bookSpace,books, true)
+    books = populateBookSpace(response.data, bookSpace,books, false)
   } catch (error) {
     console.error(
       "Error fetching filter results:",
