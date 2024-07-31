@@ -53,6 +53,7 @@ app.get("/home", authoriseUser, async (req: Request, res: Response) => {
         return res.send("Something went Wrong")
     }
     res.render("home", {
-        userInfo
+        userInfo,
+        user
     })
 })

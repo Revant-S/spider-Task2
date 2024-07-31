@@ -1,8 +1,9 @@
 <div class="sidebar">
     <div class="profile-image-container">
-        <img src="/public/appImages/artistBack.webp" alt="Artist Profile" class="profile-image">
+        <% console.log("FROM EJS " + locals.user.profileImageURL); %>
+        <img src=" <%=locals.user.profileImageURL %>" alt="Artist Profile" class="profile-image">
     </div>
-    
+
     <a href="/user/searchUsers" class="sidebar-btn">Search Users</a>
     <a href="/user/myProfile" class="sidebar-btn" id="Edit-Profile">View Profile</a>
     <% if (!locals.filterRequired) { %>
@@ -15,7 +16,8 @@
                     <form id="filterForm">
                         <div class="mb-3">
                             <label for="author" class="form-label">Key Word</label>
-                            <input type="text" class="form-control" id="keyWord" placeholder="Please Enter a Ket Word to Search Efficiently" required>
+                            <input type="text" class="form-control" id="keyWord"
+                                placeholder="Please Enter a Ket Word to Search Efficiently" required>
                         </div>
                         <div class="mb-3">
                             <label for="author" class="form-label">Author</label>

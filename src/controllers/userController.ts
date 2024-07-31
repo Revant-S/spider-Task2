@@ -26,7 +26,8 @@ export async function searchUserPage(req: Request, res: Response) {
   if (!user) return res.send("You Are Not registered");
   const users = await User.find({ email: { $ne: user.email } }, { password: 0 }).limit(20)
   res.render("searchUserPage", {
-    users
+    users,
+    user
   })
 }
 
